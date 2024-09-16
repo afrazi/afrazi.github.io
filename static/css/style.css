@@ -4,7 +4,7 @@ body    { font: 18px/25px  'Source Sans Pro', 'Palatino', sans-serif;
 strong {
 font-weight: bolder;
 }
-a       { /*color: #432165;*/ color: #8a33a0; }
+a       { /*color: #432165;*/ color: #0000FF; }
 a:hover { color: #5b187f}/*; background: #f9f8fa; }*/
 a:link                      { text-decoration: none; }
 a:visited                   { text-decoration: none; }
