@@ -4,7 +4,7 @@ body    { font: 18px/25px  'Source Sans Pro', 'Palatino', sans-serif;
 strong {
 font-weight: bolder;
 }
-a       { /*color: #432165;*/ color: #8a33a0; }
+a       { /*color: #432165;*/ color: darkblue; }
 a:hover { color: #5b187f}/*; background: #f9f8fa; }*/
 a:link                      { text-decoration: none; }
 a:visited                   { text-decoration: none; }
@@ -39,7 +39,7 @@ span.name                   { color: #333;
                         font-size: 30px; 
                         padding: 10px;
                       }
-span.page_title       {color: #8a33a0;
+span.page_title       {color: darkblue;
                       float: center;
                       text-decoration: none; 
                       font-size: 40px; 
@@ -213,7 +213,7 @@ div.blog-epilogue a         {text-decoration: none;
 
 .read-more-btn{
   padding: 10px 10px;
-  color: #8a33a0;
+  color: darkblue;
   border: none;
   outline: none;
   font-size: 15px;
@@ -222,7 +222,7 @@ div.blog-epilogue a         {text-decoration: none;
 
 .page button{
   padding: 10px 10px;
-  color: #8a33a0;
+  color: darkblue;
   border: none;
   outline: none;
   font-size: 15px;
