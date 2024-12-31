@@ -39,15 +39,20 @@
 
       <div class=separator></div>
 
-      <div class=body>
-        <ul>
-          <li>The updated version of my resume can be found <a href="./static/documents/Resume_ShidMoosavi.pdf" download> <b>here</b></a>.</li>
-          
-          <!--<li>The updated version of my one-page CV can be found <a href="./static/documents/KG_CV.pdf" download> here</a>. </li>-->
-        </ul>
-        
-        
-      </div>
+	      <div class=body>
+		  <div class=page>
+			<div class="container">
+			  <h2><strong>A deep learning-based framework for multi-source precipitation fusion</strong></h2>
+			  <p>
+				<img alt="Growth_baro_MyoFE" class="growth_pymyovent" src="./static/figures/Figure10.png">
+				Accurate quantitative precipitation estimation (QPE) is essential for various applications, including land surface modeling, flood forecasting, drought monitoring and prediction. In situ precipitation datasets, remote sensing-based estimations, and reanalysis products have heterogeneous uncertainty. Numerous models have been developed to merge precipitation estimations from different sources to improve the accuracy of QPE. However, many of these attempts are mainly focused on spatial or temporal correlations between various remote sensing sources and/or gauge data separately, and thus, the developed model cannot fully capture the inherent spatiotemporal dependencies that could potentially improve the precipitation estimations. In this study, we developed a general framework that can simultaneously merge and downscale multiple user-defined precipitation products by using rain gauge observations as target values. A novel deep learning-based convolutional neural network architecture, namely, the precipitation data fusion network (PDFN), that combines multiple layers of 3D-CNN and ConvLSTM was developed to fully exploit the spatial and temporal patterns of precipitation. This architecture benefits from techniques such as batch normalization, data augmentation schemes, and dropout layers to avoid overfitting and address skewed class proportions due to the highly imbalanced nature of the precipitation datasets. The results showed that the fused daily product remarkably improved the mean square error (MSE) and Pearson correlation coefficient (PCC) by 35% and 16%, respectively, compared to the best-performing product.
+			  </p>
+			  <!--<center><img alt="MyoFE" class="align-center" src="./static/figures/Figure6_dy.png" style="width: 500px; padding: 10px; margin: 10px 20px" /></center>-->
+
+			</div>
+			<div class=separator_line></div>
+		  </div>
+		</div>
 
       <div class=footer>
         <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Sina Shid-Moosavi</p>
