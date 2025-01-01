@@ -70,9 +70,19 @@
 			  justify-content: center;
 			  align-items: stretch;
 			}
-			.column {
+/* 			.column {
 			  flex-basis: 33.33%;
 			  text-align: center;
+			} */
+			.column {
+			    text-align: center;
+			  }
+			  .column:first-child {
+			    flex-basis: 34%;
+			  }
+			  .column:nth-child(2),
+			  .column:nth-child(3) {
+			    flex-basis: 33%;
 			}
 			.column img {
 			  width: 100%;
