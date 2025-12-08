@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ECE 383: Introduction to Robotics</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Noticia+Text:400,700' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+    <link rel="icon" href="./static/figures/favicon.ico">
+    <link rel="stylesheet" href="./static/css/style.css?20210206H0555" type="text/css" />
+
+    <!-- MathJax for LaTeX formulas -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        a {
+            color: darkblue;
+        }
+        img {
+            max-width: 60%;
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        .toc a {
+            text-decoration: none;
+            color: #003f7d;
+        }
+        .album-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 10px 0 20px 0;
+            margin-bottom: 40px;
+            scroll-snap-type: x mandatory;
+        }
+        .album-item {
+            flex: 0 0 auto;
+            scroll-snap-align: center;
+        }
+        .album-item img,
+        .album-item video {
+            width: 250px;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <span class="name"><a href="./index.html"><b>Mohammad Afrazi</b></a></span>
+    <div class="navigation">
+        <ul>
+            <li><a href="./Teaching.html"><b>Teaching</b></a></li>
+            <li class="dropdown"><a href="javascript:void(0)" class="dropbtn"><b>Projects</b></a>
+                <div class="dropdown-content">
+                    <a href="./ece383.html">ECE 383 introduction to robotics</a>
+                </div>
+            </li>
+            <li><a href="./publications.html"><b>Publications</b></a></li>
+            <li><a href="./research.html"><b>Research</b></a></li>
+            <li><a href="./index.html"><b>Home</b></a></li>
+        </ul>
+    </div>
+
+    <div class="separator"></div>
+
+    <div class="body">
+        <div class="page">
+            <h2 style="color:#003f7d; margin-top:10px;">Project Media Album</h2>
+            <div class="album-container">
+                <div class="album-item"><img src="image1.png" alt="Image 1"></div>
+                <div class="album-item"><img src="image2.png" alt="Image 2"></div>
+                <div class="album-item"><img src="image3.png" alt="Image 3"></div>
+                <div class="album-item"><img src="image4.png" alt="Image 4"></div>
+                <div class="album-item"><video controls><source src="video.mp4" type="video/mp4">Your browser does not support video.</video></div>
+            </div>
+
+            <h1>Final Project: RoboBarista</h1>
+            <h3>Gesture-Controlled Pouring System<br>Closed-Loop Sensor Integration with YOLO & Kinova</h3>
+            <p><b>Course:</b> ECE 383 — Introduction to Robotics<br><b>Team:</b> 5<br><b>Submitted by:</b> Mohammad Afrazi<br><b>Date:</b> Today</p>
+            <hr>
+
+            <h2>Table of Contents</h2>
+            <div class="toc">
+                <ul>
+                    <li><a href="#sec1">1. Documentation of Robot Actions</a></li>
+                    <li><a href="#sec2">2. Human Integration</a></li>
+                    <li><a href="#sec3">3. Challenges</a></li>
+                    <li><a href="#sec4">4. Future Work</a></li>
+                    <li><a href="#sec5">5. Takeaways</a></li>
+                    <li><a href="#sec6">6. Individual Contribution</a></li>
+                    <li><a href="#appendix">Appendix: Code</a></li>
+                </ul>
+            </div>
+            <hr>
+
+            <h2 id="sec1">1. Documentation of Robot Actions</h2>
+            <h3>High-Level Description</h3>
+            <p>Our project, the <b>"RoboBarista"</b>, simulates an autonomous coffee pouring station using:</p>
+            <ul>
+                <li>Kinova Gen3 Lite robotic arm</li>
+                <li>YOLOv8 gesture recognition</li>
+                <li>Serial digital weight scale</li>
+            </ul>
+            <p>This system performs two gesture-controlled modes:</p>
+            <ol>
+                <li><b>Precision Pour:</b> Closed-loop pouring to reach exactly 100g.</li>
+                <li><b>Barista Pour:</b> A circular parametric trajectory for artisan-style pouring.</li>
+            </ol>
+            <h3>System Diagram</h3>
+            <img src="system_diagram.png" alt="System Diagram">
+            <h3>Granular Description</h3>
+            <ul>
+                <li>YOLO gesture detection with debounce logic</li>
+                <li>Closed-loop feedback using serial weight readings</li>
+                <li>Parametric trajectory generation using: \[x = r\cos(\theta), \quad y = r\sin(\theta)\]</li>
+            </ul>
+            <h3>Robot Execution Image</h3>
+            <img src="robot_pour.png" alt="Robot Pouring">
+            <h3>Code Explanation</h3>
+            <p>The software architecture is modular and multi-threaded, including:</p>
+            <ul>
+                <li><b>detect_pub.py:</b> YOLO inference + gesture publishing</li>
+                <li><b>gesture_control.py:</b> Supervisor with MultiThreadedExecutor</li>
+                <li><b>coffee_pourer.py:</b> Closed-loop weight control</li>
+                <li><b>coffee_pourer_v2.py:</b> Circular trajectory execution</li>
+            </ul>
+            <hr>
+
+            <h2 id="sec2">2. Human Integration</h2>
+            <p>Gesture-based non-contact interaction ensures hygienic control. System uses a lockout "busy" state to avoid accidental spills.</p>
+            <hr>
+
+            <h2 id="sec3">3. Challenges</h2>
+            <ul><li>Blocking robot motions freeze ROS callbacks</li><li>Solution: Threading + MultiThreadedExecutor</li></ul>
+            <hr>
+
+            <h2 id="sec4">4. Future Work</h2>
+            <p>Extend vision pipeline to detect cup pose and execute fully dynamic pick-and-place.</p>
+            <hr>
+
+            <h2 id="sec5">5. Takeaways</h2>
+            <ul><li>Concurrency is essential in interactive robotics</li><li>Serial sensor fusion requires careful parsing</li></ul>
+            <hr>
+
+            <h2 id="sec6">6. Individual Contribution: Mohammad Afrazi</h2>
+            <h3>Robot Motion Control & Trajectory Planning</h3>
+            <ul>
+                <li>Developed full Kinova motion pipeline</li>
+                <li>Implemented both Precision & Barista modes</li>
+            </ul>
+            <h3>System Integration</h3>
+            <ul>
+                <li>Connected YOLO → ROS → Kinova</li>
+                <li>Integrated closed-loop serial weight node</li>
+            </ul>
+            <h3>Debugging & Stability</h3>
+            <p>Handled concurrency, thread safety, and sensor robustness.</p>
+            <hr>
+
+            <h2 id="appendix">Appendix: Code</h2>
+            <h3>YOLO Publisher (detect_pub.py)</h3>
+            <pre><code># Debounce-based publishing
+if self.debounce_counter >= DEBOUNCE_FRAMES:
+    self.busy_check_and_publish(self.last_seen_label, best_conf)</code></pre>
+            <h3>Supervisor Node (gesture_control.py)</h3>
+            <pre><code>def start_thread(self, target_fn):
+    thread = threading.Thread(target=self.safe_run, args=(target_fn,), daemon=True)
+    thread.start()</code></pre>
+            <h3>Closed-Loop Pouring (coffee_pourer.py)</h3>
+            <pre><code>while True:
+    line = self.ser.readline().decode().strip()
+    value = float(line)
+    if value > 100:
+        break</code></pre>
+            <h3>Circular Trajectory (coffee_pourer_v2.py)</h3>
+            <pre><code>angle = (i / steps) * 2 * math.pi
+next_x = pour_x + radius * math.cos(angle)
+next_y = pour_y + radius * math.sin(angle)</code></pre>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; Copyright <script language="JavaScript">var date = new Date(); document.write(date.getFullYear());</script> by Mohammad Afrazi</p>
+        <div class="social" style="font-size: 27px;">
+            <ul>
+                <script language="JavaScript">
+                    front = 'mohammad.afrazi';
+                    school = 'nmt';
+                    tld = 'edu';
+                    document.write('<a href=\"mailto:' + front + '@' + school + '.' + tld + '\" target=\"_blank\">');
+                </script>
+                <li><i class="fa fa-envelope" style="color:darkblue"></i></li>
+                <a href="https://github.com/mohammad-afrazi" target="_blank"><li><i class="fa fa-github" style="color:darkblue"></i></li></a>
+                <a href="https://scholar.google.com/citations?hl=en&user=EQOFz7EAAAAJ&view_op=list_works&sortby=pubdate&inst=540841841048755845" target="_blank"><li><i class="ai ai-google-scholar" style="color:darkblue"></i></li></a>
+                <a href="https://www.linkedin.com/in/mohammad-afrazi/" target="_blank"><li><i class="fa fa-linkedin-square" style="color:darkblue"></i></li></a>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
