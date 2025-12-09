@@ -29,24 +29,68 @@
             text-decoration: none;
             color: #003f7d;
         }
-        .album-container {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            padding: 10px 0 20px 0;
-            margin-bottom: 40px;
-            scroll-snap-type: x mandatory;
+        .slideshow-container {
+            max-width: 600px;
+            position: relative;
+            margin: auto;
+            margin-bottom: 20px;
         }
-        .album-item {
-            flex: 0 0 auto;
-            scroll-snap-align: center;
+        .mySlides {
+            display: none;
         }
-        .album-item img,
-        .album-item video {
-            width: 250px;
+        .mySlides img,
+        .mySlides iframe {
+            width: 100%;
             height: auto;
+            min-height: 340px; /* Adjust as needed */
             border-radius: 8px;
             border: 1px solid #ccc;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .dots-container {
+            margin-bottom: 40px;
+        }
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+        .active, .dot:hover {
+            background-color: #717171;
+        }
+        .fade {
+            animation-name: fade;
+            animation-duration: 0.5s;
+        }
+        @keyframes fade {
+            from { opacity: .4 }
+            to { opacity: 1 }
         }
     </style>
 </head>
@@ -75,123 +119,45 @@
     <div class="body">
         <div class="page">
             <h2 style="color:#003f7d; margin-top:10px;">Project Media Album</h2>
-            <div class="album-container">
-                <div class="album-item">
-                    <iframe width="250" height="141" src="https://www.youtube.com/embed/S4rzMDp9mQ8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <div class="slideshow-container">
+                <div class="mySlides fade">
+                    <iframe src="https://www.youtube.com/embed/S4rzMDp9mQ8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
-                <div class="album-item">
-                    <iframe width="250" height="141" src="https://www.youtube.com/watch?v=lEvdTODG6ZE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <div class="mySlides fade">
+                    <iframe src="https://www.youtube.com/embed/lEvdTODG6ZE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
-                
-                <div class="album-item"><img src="image2.jpeg" alt="Image 2"></div>
-                <div class="album-item"><img src="image3.jpeg" alt="Image 3"></div>
-                <div class="album-item"><img src="Image4.png" alt="Image 4"></div>
-                <div class="album-item"><img src="image1.jpeg" alt="Image 1"></div>
-                
+                <div class="mySlides fade"><img src="image2.jpeg" alt="Image 2"></div>
+                <div class="mySlides fade"><img src="image3.jpeg" alt="Image 3"></div>
+                <div class="mySlides fade"><img src="Image4.png" alt="Image 4"></div>
+                <div class="mySlides fade"><img src="image1.jpeg" alt="Image 1"></div>
+
+                <a class="prev">&#10094;</a>
+                <a class="next">&#10095;</a>
+            </div>
+            <div class="dots-container" style="text-align:center">
             </div>
 
             <h1>Final Project: RoboBarista</h1>
             <h3>Gesture-Controlled Pouring System<br>Closed-Loop Sensor Integration with YOLO & Kinova</h3>
             <p><b>Course:</b> ECE 383 — Introduction to Robotics<br><b>Team:</b> 5<br><b>Submitted by:</b> Mohammad Afrazi<br><b>Date:</b> Today</p>
-            <hr>
 
-            <h2>Table of Contents</h2>
-            <div class="toc">
-                <ul>
-                    <li><a href="#sec1">1. Documentation of Robot Actions</a></li>
-                    <li><a href="#sec2">2. Human Integration</a></li>
-                    <li><a href="#sec3">3. Challenges</a></li>
-                    <li><a href="#sec4">4. Future Work</a></li>
-                    <li><a href="#sec5">5. Takeaways</a></li>
-                    <li><a href="#sec6">6. Individual Contribution</a></li>
-                    <li><a href="#appendix">Appendix: Code</a></li>
-                </ul>
-            </div>
-            <hr>
+            <h2>RoboBarista -- Gesture-Controlled Robotic Pouring</h2>
+            <p>RoboBarista is an autonomous, gesture-controlled pouring system built around a Kinova Gen3 Lite robotic arm and a ROS~2 software stack. The goal of the project was to move beyond simple pick-and-place and tackle fluid and granular manipulation, where trajectory shape and timing matter for avoiding spills and achieving consistent, repeatable pours.</p>
 
-            <h2 id="sec1">1. Documentation of Robot Actions</h2>
-            <h3>High-Level Description</h3>
-            <p>Our project, the <b>"RoboBarista"</b>, simulates an autonomous coffee pouring station using:</p>
-            <ul>
-                <li>Kinova Gen3 Lite robotic arm</li>
-                <li>YOLOv8 gesture recognition</li>
-                <li>Serial digital weight scale</li>
-            </ul>
-            <p>This system performs two gesture-controlled modes:</p>
-            <ol>
-                <li><b>Precision Pour:</b> Closed-loop pouring to reach exactly 100g.</li>
-                <li><b>Barista Pour:</b> A circular parametric trajectory for artisan-style pouring.</li>
-            </ol>
-            <h3>System Diagram</h3>
             <img src="system_diagram.png" alt="System Diagram">
-            <h3>Granular Description</h3>
-            <ul>
-                <li>YOLO gesture detection with debounce logic</li>
-                <li>Closed-loop feedback using serial weight readings</li>
-                <li>Parametric trajectory generation using: \[x = r\cos(\theta), \quad y = r\sin(\theta)\]</li>
-            </ul>
-            <h3>Robot Execution Image</h3>
             <img src="robot_pour.png" alt="Robot Pouring">
-            <h3>Code Explanation</h3>
-            <p>The software architecture is modular and multi-threaded, including:</p>
-            <ul>
-                <li><b>detect_pub.py:</b> YOLO inference + gesture publishing</li>
-                <li><b>gesture_control.py:</b> Supervisor with MultiThreadedExecutor</li>
-                <li><b>coffee_pourer.py:</b> Closed-loop weight control</li>
-                <li><b>coffee_pourer_v2.py:</b> Circular trajectory execution</li>
-            </ul>
-            <hr>
 
-            <h2 id="sec2">2. Human Integration</h2>
-            <p>Gesture-based non-contact interaction ensures hygienic control. System uses a lockout "busy" state to avoid accidental spills.</p>
-            <hr>
-
-            <h2 id="sec3">3. Challenges</h2>
-            <ul><li>Blocking robot motions freeze ROS callbacks</li><li>Solution: Threading + MultiThreadedExecutor</li></ul>
-            <hr>
-
-            <h2 id="sec4">4. Future Work</h2>
-            <p>Extend vision pipeline to detect cup pose and execute fully dynamic pick-and-place.</p>
-            <hr>
-
-            <h2 id="sec5">5. Takeaways</h2>
-            <ul><li>Concurrency is essential in interactive robotics</li><li>Serial sensor fusion requires careful parsing</li></ul>
-            <hr>
-
-            <h2 id="sec6">6. Individual Contribution: Mohammad Afrazi</h2>
-            <h3>Robot Motion Control & Trajectory Planning</h3>
-            <ul>
-                <li>Developed full Kinova motion pipeline</li>
-                <li>Implemented both Precision & Barista modes</li>
-            </ul>
-            <h3>System Integration</h3>
-            <ul>
-                <li>Connected YOLO → ROS → Kinova</li>
-                <li>Integrated closed-loop serial weight node</li>
-            </ul>
-            <h3>Debugging & Stability</h3>
-            <p>Handled concurrency, thread safety, and sensor robustness.</p>
-            <hr>
-
-            <h2 id="appendix">Appendix: Code</h2>
-            <h3>YOLO Publisher (detect_pub.py)</h3>
-            <pre><code># Debounce-based publishing
-if self.debounce_counter >= DEBOUNCE_FRAMES:
-    self.busy_check_and_publish(self.last_seen_label, best_conf)</code></pre>
-            <h3>Supervisor Node (gesture_control.py)</h3>
-            <pre><code>def start_thread(self, target_fn):
-    thread = threading.Thread(target=self.safe_run, args=(target_fn,), daemon=True)
-    thread.start()</code></pre>
-            <h3>Closed-Loop Pouring (coffee_pourer.py)</h3>
-            <pre><code>while True:
-    line = self.ser.readline().decode().strip()
-    value = float(line)
-    if value > 100:
-        break</code></pre>
-            <h3>Circular Trajectory (coffee_pourer_v2.py)</h3>
-            <pre><code>angle = (i / steps) * 2 * math.pi
-next_x = pour_x + radius * math.cos(angle)
-next_y = pour_y + radius * math.sin(angle)</code></pre>
+            <p>A YOLOv8n-based vision pipeline runs on a live camera feed and detects numerical hand gestures in a designated region of interest. Holding up one finger selects a <em>Simple Gravimetric Pour</em>, while two fingers trigger a <em>Barista-Style Circular Pour</em>. The detector publishes the recognized gesture to a <code>/gesture</code> topic, where a <code>GestureControl</code> supervisor node maps it to the appropriate behavior node. To make the interaction robust, the perception layer includes ROI cropping, confidence thresholds, multi-frame debouncing, and a state-change rule so the robot only reacts to intentional, stable commands. Once a command is accepted, the system enters a <code>BUSY</code> state and ignores further gestures until the motion is complete.</p>
+            <p>On the execution side, both behaviors use MoveIt~2 to generate Cartesian paths for the Kinova arm. In the Simple Gravimetric Pour, the robot picks up a custom cup, moves above a bowl, and performs a slow, 20-step tilt between upright and pouring orientations. A digital scale---built from a load cell, amplifier, and Arduino---streams live mass readings over serial to a ROS~2 scale node, which publishes on <code>/weight</code>. The pouring node monitors this topic and stops as soon as the measured mass exceeds 100~g, then returns the cup upright and places it back on the table. In the Barista-Style Circular Pour, the arm tilts the cup once to a fixed angle and then follows a parametric circular trajectory of radius 3~cm above the bowl, computing waypoints using
+            \[
+            x_i = x_c + r \cos(\theta_i), \qquad
+            y_i = y_c + r \sin(\theta_i).
+            \]
+            This mode runs open loop and focuses on producing a smooth, visually pleasing circular pouring pattern similar to manual barista techniques.</p>
+            <p>Under the hood, the system follows a clean Supervisor--Worker architecture. The YOLO node handles perception, <code>GestureControl</code> handles decision-making and concurrency using a <code>MultiThreadedExecutor</code> and background threads, and the two motion ``bots'' (<code>coffee_pourer.py</code> and <code>coffee_pourer_v2.py</code>) encapsulate the gravimetric and circular pouring behaviors. A separate scale node bridges the Arduino-based scale into ROS~2. Together, these components form a full human-robot collaboration pipeline that combines vision, motion planning, and feedback control for dynamic pouring in a human-centric, touchless interface.</p>
+            <h3>My Role</h3>
+            <p>My contributions to RoboBarista focused on motion control, system integration, and overall robustness of the behavior pipeline. I designed and implemented the motion control pipeline for the Kinova Gen3 Lite using MoveIt~2, including pick-and-place logic from the home pose to the cup and from the cup to the pouring location. I developed the trajectory generation for both pouring modes: a static precision pour with a controlled retract motion once the stop condition is reached, and a barista-style circular pour based on parametric equations that compute Cartesian waypoints on the fly for a smooth circular motion.</p>
+            <p>Together with Celia and Feng, I connected and troubleshot the YOLOv8 gesture recognition node and its interface to the robot controller so that discrete gesture labels from <code>/gesture</code> directly trigger the appropriate behavior in the <code>GestureControl</code> supervisor. I also helped design the logic that maps class ``1'' and ``2'' to the Simple Gravimetric Pour and Barista Circular Pour modes, ensuring clean state transitions and preventing accidental re-triggers.</p>
         </div>
     </div>
 
@@ -215,5 +181,6 @@ next_y = pour_y + radius * math.sin(angle)</code></pre>
 
 </div>
 <script src="static/js/dropdown.js"></script>
+<script src="static/js/slider.js"></script>
 </body>
 </html>
